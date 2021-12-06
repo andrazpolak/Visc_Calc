@@ -7,11 +7,13 @@ import matplotlib.pyplot as plt
 
 
 st.title('Viscosity Calculator')
-st.markdown('This little web application uses a artificial neural network (ANN) to calculate viscosities of silicate melts. To your left you see a tab where the appropriate oxide'
+readme = st.beta_expander('About', False)
+readme.write('This little web application uses a artificial neural network (ANN) to calculate viscosities of silicate melts. To your left you see a tab where the appropriate oxide'
           'components can be entered in weight %. These are transformed into mol fractions and then input into the ANN. The total input composition is always normalised to 100 mol%.\n'
           'The ANN is used to calculate synthetic data points at [0.0, 0.5, 1.0, 1.5, 2.0, 9.5, 10, 10.5, 11.5] for a SiO2 content less than or equal to 60 wt%'
           'and [2, 2.5, 3, 3.5, 4, 4.5, 9.5, 10, 10.5, 11.5] for a SiO2 content larger then 60%. These datapoints are then fit using the MYEGA equation by Mauro et al. (2009)'
-          'with A = -2.9. The final output are the fitting parameters m and Tg."')
+          'with A = -2.9. The final output are the fitting parameters m and Tg.')
+
 
 path_model = './model'
 
