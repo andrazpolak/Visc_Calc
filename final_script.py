@@ -10,7 +10,7 @@ Loading the artifical neural network, composition and temperatures
 '''
 
 
-path_model = '/Users/langhammer/Documents/PhD/Magma/Neural_Net/Net/Calc_Script/script/Online_version/Streamlit/model'
+path_model = './model'
 
 
 left_column, right_column = st.columns(2)
