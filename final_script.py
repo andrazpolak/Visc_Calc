@@ -37,6 +37,7 @@ with st.sidebar.form(key = 'composition'):
     cr_input = st.number_input('Cr2O3 content in weight%', min_value = 0.0, max_value = 100.0, value = 0.0)
     fe2_input = st.number_input('Fe2O3 content in weight%', min_value = 0.0, max_value = 100.0, value = 4.48995)
     h_input = st.number_input('H2O content in weight%', min_value = 0.0, max_value = 100.0, value = 0.0)
+    t_input = st.number_input('Temperature in K', min_value = 0.0, value = 1000.0)
     
     button = st.form_submit_button(label = 'Calculate viscosity')
  
@@ -50,7 +51,7 @@ if button:
         print(f'The composition file has {len(comp)} entries. Please be sure that it only includes 13 entries of oxide components in wt%.')
         print(f'Insert them as column in the order: SiO2, TiO2, Al2O3,	FeO, MnO, MgO, CaO, Na2O, K2O, P2O5, Cr2O3, Fe2O3, H2O')
     else:
-        param, t, eta, fit, t_plot = nn(path_model, comp)
+        param, t, eta, fit, t_plot, eta_goal = nn(path_model, comp, t_input)
 
        
 
@@ -58,11 +59,15 @@ if button:
     fig, ax = plt.subplots()
     ax.set_ylabel('$\log \eta$ with $\eta$ in Pa s')
     ax.set_xlabel('10000/T in 1/K')
-    ax.plot(10000/t, eta, 'bo', label = 'Synthetic data')
     ax.plot(10000/t_plot, fit , label = 'MYEGA')
+    ax.plot(10000/t, eta, 'bo', label = 'Synthetic data')  
+    ax.plot(10000/t_input, eta_goal , 'ro', label = 'Input')
     ax.legend()
 
     st.pyplot(fig)
-    st.write('Parameters resulting from MYEGA fit with A = -2.9:')
-    st.write('Tg = ' + str(param[0]) + '  m = ' + str(param[1]))
+    st.write('__Parameters resulting from MYEGA fit with $A$ = -2.9:__')
+    st.write('$T_{g}$ = ' + str(param[0]) + ' K')
+    st.write('$m$ = ' + str(param[1]))
+    st.write('__Viscosity at input temperature:__')
+    st.write('log $\eta$ = ' + str(eta_goal) + '  at T = ' + str(t_input) + ' K')
 
