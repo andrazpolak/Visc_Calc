@@ -4,7 +4,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-
+'''
+Code created by Dominic Langhammer, at Bayerisches Geoinstitut, Bayreuth, Germany
+Version: 13th Dec. 2021
+'''
 
 st.title('Viscosity Calculator')
 readme = st.expander('About', False)
