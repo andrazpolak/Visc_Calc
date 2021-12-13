@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 
 '''
-Code created by Dominic Langhammer, at Bayerisches Geoinstitut, Bayreuth, Germany
+Code created by Dominic Langhammer, at Bayerisches Geoinstitut, Bayreuth, Germany \n
 Version: 13th Dec. 2021
 '''
 
