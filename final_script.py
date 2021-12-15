@@ -44,19 +44,8 @@ with st.sidebar.form(key = 'composition'):
  
 if button:    
     comp = np.array([si_input, ti_input, al_input, fe_input, mn_input, mg_input, ca_input, na_input, k_input, p_input, cr_input, fe2_input, h_input])
+    param, t, eta, fit, t_plot, eta_goal = nn(path_model, comp, t_input)
 
-    if len(comp) < 13:
-        print(f'The composition file only has {len(comp)} entries. Please be sure that it only includes 13 entries of oxide components in wt%.')
-        print(f'Insert them as column in the order: SiO2, TiO2, Al2O3,	FeO, MnO, MgO, CaO, Na2O, K2O, P2O5, Cr2O3, Fe2O3, H2O')
-    elif len(comp) > 13:
-        print(f'The composition file has {len(comp)} entries. Please be sure that it only includes 13 entries of oxide components in wt%.')
-        print(f'Insert them as column in the order: SiO2, TiO2, Al2O3,	FeO, MnO, MgO, CaO, Na2O, K2O, P2O5, Cr2O3, Fe2O3, H2O')
-    else:
-        param, t, eta, fit, t_plot, eta_goal = nn(path_model, comp, t_input)
-
-       
-
-    
     fig, ax = plt.subplots()
     ax.set_ylabel('$\log \eta$ with $\eta$ in Pa s')
     ax.set_xlabel('10000/T in 1/K')
