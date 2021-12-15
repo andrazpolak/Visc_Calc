@@ -24,8 +24,6 @@ readme.write('The application and code has been developed by Dominic Langhammer 
 path_model = './model'
 
 
-left_column, right_column = st.columns(2)
-
 with st.sidebar.form(key = 'composition'):
     si_input = st.number_input('SiO2 content in weight%', min_value = 0.0, max_value = 100.0, value = 49.3)
     ti_input = st.number_input('TiO2 content in weight%', min_value = 0.0, max_value = 100.0, value = 0.86)
