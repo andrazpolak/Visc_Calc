@@ -19,7 +19,7 @@ def mol_conv(wt):
     cr_w = 51.996
     h_w = 1.007
     
-    #mol weight
+    #calculating mol weight
     sio2 = si_w + 2*o_w
     tio2 = ti_w + 2*o_w
     al2o3 = 2*al_w + 3*o_w
@@ -40,12 +40,13 @@ def mol_conv(wt):
     wt_sum = np.sum(wt[:-1])
     wt_div = wt/wt_sum
     wt_norm_no_h2o = (100-wt[-1])*wt[:-1]/wt_sum
+    #add H2O back to array
     wt_norm = np.append(wt_norm_no_h2o, wt[-1])
     
     #divide wt% by molar weight
     wt_div_mol = wt_norm/mol_weight
     
-    #calculate mol%
+    #calculate mole fraction and mol%
     wt_div_mol_sum = np.sum(wt_div_mol)
     mol_frac = (wt_div_mol/wt_div_mol_sum)
     mol_per = mol_frac * 100

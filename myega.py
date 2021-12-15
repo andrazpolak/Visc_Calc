@@ -19,11 +19,7 @@ def myega(t, eta, t_input):
     ### Fit MYEGA equation to data. ###
     
     param, cov = optimize.curve_fit(myega_fit, t, eta, p0 = [900, 30], bounds = (0, np.inf))
-    
-   
 
-    
-    np.vectorize(myega_fit)
     
     ### Calculate viscosities form the fitted MYEGA model for the input temperature and the plot ###
     t_plot = np.arange(min(t), max(t), 1)
