@@ -12,9 +12,9 @@ def visc_calc(mol_frac, path_model, si):
     
     model = tf.keras.models.load_model(path_model)
     if si <= 60:
-        eta_goal = [0.0, 0.5, 1.0, 1.5, 2.0, 9.5, 10, 10.5, 11.5]
+        eta_goal = [0.0, 0.5, 1.0, 1.5, 2.0, 9.5, 10, 10.5, 11.0, 11.5]
     else:
-        eta_goal = [2, 2.5, 3, 3.5, 4, 4.5, 9.5, 10, 10.5, 11.5]
+        eta_goal = [2, 2.5, 3, 3.5, 4, 4.5, 9.5, 10, 10.5, 11.0, 11.5]
     
     ### Normalisation factor for input temperatures. ###
     t_max = 2023.0
