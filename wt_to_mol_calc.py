@@ -19,6 +19,10 @@ def mol_conv(wt):
     cr_w = 51.996
     h_w = 1.007
     
+    # Normalisation parameters except temperature
+    avg_param = np.array([0.646068624,	0.006122257, 0.105031177, 0.015038062,	0.00071489,	0.056749591, 0.068780308, 0.048986216,	0.028347995, 0.000494008, 6.37117E-05, 0.008792248,	0.014476695, 0.218617062, 0.324060518])
+    var_param = np.array([0.013966878, 7.54969E-05, 0.00186878, 0.000335448,	7.06524E-07, 0.00498134, 0.00372115, 0.001487268, 0.001029727, 1.62697E-06, 9.68478E-08, 0.000148228, 0.000994256, 0.010377959, 0.047453609])
+    
     #calculating mol weight
     sio2 = si_w + 2*o_w
     tio2 = ti_w + 2*o_w
@@ -51,5 +55,16 @@ def mol_conv(wt):
     mol_frac = (wt_div_mol/wt_div_mol_sum)
     mol_per = mol_frac * 100
     
-    return mol_frac, mol_per
+    # Normalisem mol fractions
+    
+    sm = mol_frac[3] + mol_frac[4] + mol_frac[5] + mol_frac[6] + mol_frac[7] + mol_frac[8]
+
+    if mol_frac[8] + mol_frac[7] == 0:
+        nak = 0
+    else:
+        nak = mol_frac[8]/(mol_frac[8] + mol_frac[7])
+    mol_frac = np.append(mol_frac, [sm, nak])
+    normalised = (mol_frac - avg_param)/np.sqrt(var_param)
+    
+    return normalised, mol_frac, mol_per
 

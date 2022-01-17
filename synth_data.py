@@ -3,7 +3,7 @@ import tensorflow as tf
 from tensorflow import keras
 
 
-def visc_calc(mol_frac, path_model, si):
+def visc_calc(inp, path_model, si):
     '''This function calculates the synthetic data points from a feed forward artifical neural network. A bisection algorithm is used to find specific viscosities in
     the high and low viscosity regime. These are chosen depending on the SiO2 content in wt% of the respective sample.''' 
     
@@ -20,30 +20,18 @@ def visc_calc(mol_frac, path_model, si):
     t_max = 2023.0
 
     
-    
-    ### Calculation of the structure modifier (SM) and K/(Na + K) parameters, which are used as input. ###
-    sm = mol_frac[3] + mol_frac[4] + mol_frac[5] + mol_frac[6] + mol_frac[7] + mol_frac[8]
-
-    if mol_frac[8] + mol_frac[7] == 0:
-        nak = 0
-    else:
-        nak = mol_frac[8]/(mol_frac[8] + mol_frac[7])
-        
-    ### Defining the input array without Cr. ###    
-    
-        
-    
-    
     t_goal = []
     eta = []
     
     ### Temperature boundaries for the biscetion. ###
     ### This interval has been chosen rather large to ensure that the goal viscosity values are within thises boundaries. ###
-    t_top_start = 3000.0/t_max
-    t_bot_start = 300.0/t_max
+    t_top_start = (3000.0/t_max- 0.602847523)/np.sqrt(0.031535353)
+    t_bot_start = (300.0/t_max- 0.602847523)/np.sqrt(0.031535353)
     t_mid_start = (t_top_start + t_bot_start)/2
     
-    comp  = np.c_[t_mid_start, mol_frac[0], mol_frac[1], mol_frac[2], mol_frac[3], mol_frac[4], mol_frac[5], mol_frac[6], mol_frac[7], mol_frac[8], mol_frac[9], mol_frac[11], mol_frac[12], sm, nak]
+    ### Defining the input array without Cr. ###    
+    comp  = np.c_[t_mid_start, inp[0], inp[1], inp[2], inp[3], inp[4], inp[5], inp[6], inp[7], inp[8], inp[9], inp[11], inp[12], inp[13], inp[14]]
+    
     eta_mid_start = model(comp)
     
     ### Start of bisection loop. ###
@@ -81,7 +69,7 @@ def visc_calc(mol_frac, path_model, si):
             err = eta_mid-goal
 
         ### Adding calculated values to a temperatuer and viscosity array. ###
-        t_goal.append(t_mid*t_max)
+        t_goal.append((t_mid*np.sqrt(0.031535353) + 0.602847523)*t_max)
         eta.append(eta_mid)
 
     return t_goal, eta

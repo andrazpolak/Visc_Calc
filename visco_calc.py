@@ -11,11 +11,11 @@ def neural_net(path_model, comp, t_input):
     
     ### Load wt% composition. ###
     ### Convert wt% to mol fraction and mol%. ###
-    mol_frac, mol_per = mol.mol_conv(comp)
+    normalised, mol_frac, mol_per = mol.mol_conv(comp)
     
     
     ### Calculate synthetic data. ###
-    t, eta = synth(mol_frac, path_model, comp[0])
+    t, eta = synth(normalised, path_model, comp[0])
     ### Fitting the synthetic with a MYEGA equation and calculating the viscosities for the intput temperatures. ###
     param, fit, t_plot, eta_goal = myega(t, eta, t_input)
     t = np.asarray(t)
