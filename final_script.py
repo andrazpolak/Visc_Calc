@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 '''
 Code created by Dominic Langhammer, Bayerisches Geoinstitut, Bayreuth, Germany \n
-Version: 17th Jan. 2022
+Version: 01/06/2022
 '''
 
 st.title('Viscosity Calculator')
