@@ -10,13 +10,15 @@ Version: 17th Jan. 2022
 '''
 
 st.title('Viscosity Calculator')
-readme = st.expander('About', False)
+readme = st.expander('About', True)
 readme.write('This web application uses an artificial neural network (ANN) to calculate viscosities of silicate melts. To your left you see a tab where the appropriate oxide'
           'components can be entered in weight %. These are transformed into mol fractions and then input into the ANN. The total input composition is always normalised to 100 mol%.')
 readme.write('')
 readme.write('The ANN is used to calculate synthetic data points at [0.0, 0.5, 1.0, 1.5, 2.0, 9.5, 10, 10.5, 11.5] for a SiO2 content less than or equal to 60 wt% '
           'and [2, 2.5, 3, 3.5, 4, 4.5, 9.5, 10, 10.5, 11.5] for a SiO2 content larger then 60 wt%. These datapoints are then fit using the MYEGA equation by Mauro et al. (2009) '
           'with A = -2.9. The final output are the fitting parameters m and Tg.')
+readme.write('')
+readme.write('If the iron content is only given as FeO_total, please distribute it as FeO = FeO_total/2 and Fe2O3 = FeO_total*1.11/2')
 readme.write('')
 readme.write('The application and code has been developed by Dominic Langhammer at Bayerisches Geoinstitut (BGI), Bayreuth, Germany. As of now, (6th of Dec. 2021) this has not been subject to peer review.')
 
@@ -29,6 +31,7 @@ with st.sidebar.form(key = 'composition'):
     ti_input = st.number_input('TiO2 content in weight%', min_value = 0.0, max_value = 100.0, value = 0.86)
     al_input = st.number_input('Al2O3 content in weight%', min_value = 0.0, max_value = 100.0, value = 16.9)
     fe_input = st.number_input('FeO content in weight%', min_value = 0.0, max_value = 100.0, value = 4.045)
+    fe2_input = st.number_input('Fe2O3 content in weight%', min_value = 0.0, max_value = 100.0, value = 4.48995)
     mn_input = st.number_input('MnO content in weight%', min_value = 0.0, max_value = 100.0, value = 0.16)
     mg_input = st.number_input('MgO content in weight%', min_value = 0.0, max_value = 100.0, value = 6.12)
     ca_input = st.number_input('CaO content in weight%', min_value = 0.0, max_value = 100.0, value = 12.00)
@@ -36,7 +39,6 @@ with st.sidebar.form(key = 'composition'):
     k_input = st.number_input('K2O content in weight%', min_value = 0.0, max_value = 100.0, value = 2.14)
     p_input = st.number_input('P2O5 content in weight%', min_value = 0.0, max_value = 100.0, value = 0.5)
     cr_input = st.number_input('Cr2O3 content in weight%', min_value = 0.0, max_value = 100.0, value = 0.0)
-    fe2_input = st.number_input('Fe2O3 content in weight%', min_value = 0.0, max_value = 100.0, value = 4.48995)
     h_input = st.number_input('H2O content in weight%', min_value = 0.0, max_value = 100.0, value = 0.0)
     t_input = st.number_input('Temperature in K', min_value = 0.0, value = 1000.0)
     
