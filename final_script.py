@@ -21,7 +21,7 @@ readme.write('')
 readme.write('If the iron content is only given as FeO_total, please distribute it as FeO = FeO_total/2 and Fe2O3 = FeO_total*1.11/2')
 readme.write('')
 readme.write('The application and code has been developed by Dominic Langhammer at Bayerisches Geoinstitut (BGI), Bayreuth, Germany. Please cite:
-             https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2022GC010673')
+             streamlit.hyperlink("https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2022GC010673")')
 
 
 path_model = './model'
