@@ -12,3 +12,4 @@ matplotlib = "*"
 
 [requires]
 python_version = "3.7.12"
+protobuf==3.20.1
