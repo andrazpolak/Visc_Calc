@@ -7,9 +7,9 @@ name = "pypi"
 tensorflow = "*"
 scipy = "*"
 matplotlib = "*"
+protobuf = "3.20.5"
 
 [dev-packages]
 
 [requires]
 python_version = "3.10.3"
-protobuf = "3.20.5"
