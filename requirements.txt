@@ -2,3 +2,4 @@ tensorflow
 scipy
 matplotlib
 protobuf == 3.20.1
+urllib3<2.0
